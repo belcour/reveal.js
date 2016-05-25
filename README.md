@@ -29,6 +29,7 @@ reveal.js comes with a broad range of features including [nested slides](https:/
   - [Internal links](#internal-links)
   - [Fragments](#fragments)
   - [Fragment events](#fragment-events)
+  - [Fragment scripts](#fragment-scripts)
   - [Code syntax highlighting](#code-syntax-highlighting)
   - [Slide number](#slide-number)
   - [Overview mode](#overview-mode)
@@ -698,6 +699,23 @@ Reveal.addEventListener( 'fragmentshown', function( event ) {
 Reveal.addEventListener( 'fragmenthidden', function( event ) {
 	// event.fragment = the fragment DOM element
 } );
+```
+
+### Fragment scripts
+
+You can add a callable function when a fragment is called using the `data-call="func-name"` tag in the fragment element. The referenced function `func-name` will be called when the fragment is showed forward and hidden backward. The called function must take as argument a signed integer to know whether the call is forward or backward.
+
+```html
+<p class="fragment" data-call="mycall"></p>
+<script>
+   var mycall = function(offset) {
+      if(offset > 0) {
+         alert("Forward!");
+      } else {
+         alert("Backward!");
+      }
+   }
+</script>
 ```
 
 ### Code syntax highlighting

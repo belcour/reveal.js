@@ -3632,6 +3632,12 @@
 
 						if( i === index ) {
 							element.classList.add( 'current-fragment' );
+
+							// Call attached scripts
+							if( element.hasAttribute('data-call')) {
+								var call = element.getAttribute('data-call');
+								window[call](offset);
+							}
 						}
 					}
 					// Hidden fragments
@@ -3639,6 +3645,12 @@
 						if( element.classList.contains( 'visible' ) ) fragmentsHidden.push( element );
 						element.classList.remove( 'visible' );
 						element.classList.remove( 'current-fragment' );
+
+						// Call any specific script attached to the fragment
+						if(i+offset === index && element.hasAttribute('data-call')) {
+							var call = element.getAttribute('data-call');
+							window[call](offset);
+						}
 					}
 
 
